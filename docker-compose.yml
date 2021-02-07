@@ -1,0 +1,29 @@
+version: '3'
+
+networks: 
+  my-network-name:
+
+services:
+  reverse-proxy:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./my-server.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - my-network-name
+
+  books:
+    image: books
+    # ports:
+    #  - "5000:5000"
+    networks:
+      - my-network-name
+
+  booksreact:
+    image: booksreact
+    # ports:
+    #  - "3000:3000"
+    networks:
+      - my-network-name
+
